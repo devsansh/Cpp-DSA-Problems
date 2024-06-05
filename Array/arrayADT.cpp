@@ -18,10 +18,12 @@ public:
         delete[] A;
     }
 
+    //Method Declarations
     void Display();
     void Append(int number);
+    void Insert(int index, int value);
 };
-
+//Method Definations
 void Array::Display() {
     for (int i = 0; i < length; i++) {
         cout << A[i] << " ";
@@ -38,6 +40,19 @@ void Array::Append(int number) {
     }
 }
 
+void Array::Insert(int index, int value){
+    if(length < size){
+        for(int i = length; i >index;i--){
+            A[i] = A[i-1];
+        }
+    A[index] = value;
+
+    }else{
+        cout<<"Array is full. Cannot append the number." << endl;
+    }
+
+}
+
 int main() {
     int size,length;
     cout << "Enter size of Array: ";
@@ -46,12 +61,14 @@ int main() {
     cin>>length;
     Array arra(size,length);
     for (int i = 0; i < arra.length; i++) {
-        arra.A[i] = rand();
+        arra.A[i] = rand() % 50;
     }
     // Display Array
     arra.Display();
     // Example of appending a number
     arra.Append(50);
+    arra.Display();
+    arra.Insert(2,50);
     arra.Display();
     
     return 0;
