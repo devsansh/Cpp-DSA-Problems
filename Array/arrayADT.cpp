@@ -25,6 +25,8 @@ public:
     void Delete(int index);
     void SearchResult(int index);
     int LinearSearch(int key);
+    int TranspositionLinearSearch(int key);
+    int MoveToHeadLinearSearch(int key);
 };
 //Method Definations
 void Array::Display() {
@@ -79,6 +81,24 @@ int Array::LinearSearch(int key){
     for(int i = 0; i < length; i++){
         if(A[i] == key){
             return i;
+        }
+    }return -1;
+}
+
+int Array::TranspositionLinearSearch(int key){
+    for(int i = 0; i < length; i++){
+        if(A[i] == key){
+            swap(A[i],A[i-1]);
+            return i-1;
+        }
+    }return -1;
+}
+
+int Array::MoveToHeadLinearSearch(int key){
+    for(int i = 0; i < length; i++){
+        if(A[i] == key){
+            swap(A[i],A[0]);
+            return i-1;
         }
     }return -1;
 }
