@@ -23,6 +23,8 @@ public:
     void Append(int number);
     void Insert(int index, int value);
     void Delete(int index);
+    void SearchResult(int index);
+    int LinearSearch(int key);
 };
 //Method Definations
 void Array::Display() {
@@ -65,6 +67,22 @@ void Array::Delete(int index){
     }
 }
 
+void Array::SearchResult(int index){
+    if(index == -1){
+        cout<<"Key is not present.\n";
+    }else{
+        cout<<"Key present at index["<<index<<"].\n";
+    }
+}
+
+int Array::LinearSearch(int key){
+    for(int i = 0; i < length; i++){
+        if(A[i] == key){
+            return i;
+        }
+    }return -1;
+}
+
 int main() {
     int size,length;
     cout << "Enter size of Array: ";
@@ -81,7 +99,8 @@ int main() {
     // arra.Append(50);
     // arra.Display();
     // arra.Insert(5,50);
-    arra.Delete(5);
+    int searchResult = arra.LinearSearch(5);
+    arra.SearchResult(searchResult);
     arra.Display();
     
     return 0;
