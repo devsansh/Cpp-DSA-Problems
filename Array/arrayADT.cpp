@@ -22,6 +22,7 @@ public:
     void Display();
     void Append(int number);
     void Insert(int index, int value);
+    void Delete(int index);
 };
 //Method Definations
 void Array::Display() {
@@ -42,15 +43,26 @@ void Array::Append(int number) {
 
 void Array::Insert(int index, int value){
     if(length < size){
-        for(int i = length; i >index;i--){
+        for(int i = length; i > index;i--){
             A[i] = A[i-1];
         }
     A[index] = value;
-
+    length++;
     }else{
         cout<<"Array is full. Cannot append the number." << endl;
     }
 
+}
+
+void Array::Delete(int index){
+    if(index < length){
+        for(int i = index;i < length - 1;i++){
+            A[i] = A[i+1];
+        }
+        length--;
+    }else{
+        cout<<"Index is out of bound.\n";
+    }
 }
 
 int main() {
@@ -66,9 +78,10 @@ int main() {
     // Display Array
     arra.Display();
     // Example of appending a number
-    arra.Append(50);
-    arra.Display();
-    arra.Insert(2,50);
+    // arra.Append(50);
+    // arra.Display();
+    // arra.Insert(5,50);
+    arra.Delete(5);
     arra.Display();
     
     return 0;
