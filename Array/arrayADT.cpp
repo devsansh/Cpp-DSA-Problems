@@ -32,6 +32,7 @@ public:
     int MoveToHeadLinearSearch(int key);
     int IterativeBinarySearch(int key);
     int RecursiveBinarySearch(int key,int low, int high);
+    void GetElement(int index);
 };
 // Method Definations
 void Array::Display() {
@@ -160,6 +161,14 @@ int Array::RecursiveBinarySearch(int key,int low,int high){
     return -1;
 }
 
+void Array::GetElement(int index){
+    if(index >=0 && index < length){
+        cout<<"Element at index"<<"["<<index<<"]: "<<A[index]<<endl;
+    }else{
+        cout<<"Index out of bounds."<<endl;
+    }
+}
+
 int main() {
     int size, length;
     cout << "Enter size of Array: ";
@@ -184,11 +193,21 @@ int main() {
     // int searchResult = arra.LinearSearch(5);
     //arra.SearchResult(searchResult);
     // arra.Display();
-    arra.Sort();
-    arra.Display();
-    int key;
-    cin>>key;
-    int r = arra.RecursiveBinarySearch(key,0,length--);
-    arra.SearchResult(r);
+    // arra.Sort();
+    // arra.Display();
+    // int key;
+    // cin>>key;
+    // int r = arra.RecursiveBinarySearch(key,0,length--);
+    // arra.SearchResult(r);
+    int index;
+    int T;
+    cin>>T;
+    while (T--)
+    {
+        cin >> index;
+        arra.GetElement(index);
+    }
+    
+    
     return 0;
 }
