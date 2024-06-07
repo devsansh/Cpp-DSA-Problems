@@ -31,6 +31,7 @@ public:
     int TranspositionLinearSearch(int key);
     int MoveToHeadLinearSearch(int key);
     int IterativeBinarySearch(int key);
+    int RecursiveBinarySearch(int key,int low, int high);
 };
 // Method Definations
 void Array::Display() {
@@ -145,6 +146,20 @@ int Array::IterativeBinarySearch(int key){
     return -1;
 }
 
+int Array::RecursiveBinarySearch(int key,int low,int high){
+    if(low <= high){
+        int mid = low + (high - low) / 2;
+        if(key == A[mid]){
+            return mid;
+        }else if(key < A[mid]){
+            return RecursiveBinarySearch(key,0,mid-1);
+        }else{
+            return RecursiveBinarySearch(key,mid+1,high);
+        }
+    }
+    return -1;
+}
+
 int main() {
     int size, length;
     cout << "Enter size of Array: ";
@@ -173,7 +188,7 @@ int main() {
     arra.Display();
     int key;
     cin>>key;
-    int r = arra.IterativeBinarySearch(key);
+    int r = arra.RecursiveBinarySearch(key,0,length--);
     arra.SearchResult(r);
     return 0;
 }
