@@ -33,6 +33,11 @@ public:
     int IterativeBinarySearch(int key);
     int RecursiveBinarySearch(int key,int low, int high);
     void GetElement(int index);
+    void SetElement(int index, int key);
+    int MaximumElement();
+    int SortedMaximumElement();
+    int MinimumElement();
+    int SortedMinimumElement();
 };
 // Method Definations
 void Array::Display() {
@@ -168,6 +173,62 @@ void Array::GetElement(int index){
         cout<<"Index out of bounds."<<endl;
     }
 }
+
+void Array::SetElement(int index,int key){
+    if(index >=0 && index < length){
+        A[index] = key;
+    }else{
+        cout<<"Index out of bounds."<<endl;
+    }
+}
+
+int Array::MaximumElement(){
+    int max = A[0];
+    for(int i = 1; i < length; i++){
+        if(A[i] > max){
+            max = A[i];
+        }
+    }
+    return max;
+}
+
+int Array::SortedMaximumElement(){
+    for (int i = 0; i < length - 1; i++) {
+        for (int j = 0; j < length - i - 1; j++) {
+            if (A[j] > A[j + 1]) {
+                swap(A[j], A[j + 1]);
+            }
+        }
+    }
+    int max = A[length -  1];
+    return max;
+}
+
+int Array::MinimumElement(){
+    int min = A[0];
+    for(int i = 1; i < length; i++){
+        if(A[i] < min){
+            min = A[i];
+        }
+    }
+    return min;
+}
+
+int Array::SortedMinimumElement(){
+    for (int i = 0; i < length - 1; i++) {
+        for (int j = 0; j < length - i - 1; j++) {
+            if (A[j] > A[j + 1]) {
+                swap(A[j], A[j + 1]);
+            }
+        }
+    }
+    int min = A[0];
+    return min;
+}
+
+
+
+/* ************************************************************************** */
 
 int main() {
     int size, length;
