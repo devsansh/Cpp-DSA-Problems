@@ -43,6 +43,9 @@ public:
     void LeftRotate();
     void RightShift();
     void RightRotate();
+    void SortedInsert();
+    void IsSorted();
+    void ArrangeArray();
 };
 // Method Definations
 void Array::Display() {
@@ -267,6 +270,17 @@ void Array::RightRotate(){
     A[0] = temp;
 }
 
+void Array::SortedInsert(){
+
+}
+
+void Array::IsSorted(){
+
+}
+
+void Array::ArrangeArray(){
+    
+}
 
 /* ************************************************************************** */
 
