@@ -38,6 +38,11 @@ public:
     int SortedMaximumElement();
     int MinimumElement();
     int SortedMinimumElement();
+    void Reverse();
+    void LeftShift();
+    void LeftRotate();
+    void RightShift();
+    void RightRotate();
 };
 // Method Definations
 void Array::Display() {
@@ -226,6 +231,40 @@ int Array::SortedMinimumElement(){
     return min;
 }
 
+void Array::Reverse(){
+    for(int i = 0, j = length - 1; i < j; i++,j--){
+        swap(A[i],A[j]);
+    }
+}
+
+void Array::LeftShift(){
+    for(int i = 0;  i < length; i++){
+        A[i] = A[i+1];
+    }
+    A[length - 1] = 0;
+}
+
+void Array::LeftRotate(){
+    A[length - 1] = A[0];
+    for(int i = 0;  i < length; i++){
+        A[i] = A[i+1];
+    }
+}
+
+void Array::RightShift(){
+    for(int i = length - 1;i > 0;i--){
+        A[i] = A[i - 1];
+    }
+    A[0] = 0;
+}
+
+void Array::RightRotate(){
+    int temp = A[length - 1];
+    for(int i = length - 1; i > 0; i--){
+        A[i] = A[i - 1];
+    }
+    A[0] = temp;
+}
 
 
 /* ************************************************************************** */
@@ -260,15 +299,19 @@ int main() {
     // cin>>key;
     // int r = arra.RecursiveBinarySearch(key,0,length--);
     // arra.SearchResult(r);
-    int index;
+    // int index;
     int T;
     cin>>T;
     while (T--)
     {
-        cin >> index;
-        arra.GetElement(index);
+        // cin >> index;
+        // arra.RightShift();
+        arra.Display();
+        arra.LeftRotate;
+        arra.Display();
+        arra.RightRotate();
+        arra.Display();
     }
-    
     
     return 0;
 }
