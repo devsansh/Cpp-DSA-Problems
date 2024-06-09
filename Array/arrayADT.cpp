@@ -245,10 +245,11 @@ void Array::LeftShift(){
 }
 
 void Array::LeftRotate(){
-    A[length - 1] = A[0];
-    for(int i = 0;  i < length; i++){
+    int temp = A[0];
+    for(int i = 0; i < length - 1; i++){
         A[i] = A[i+1];
     }
+    A[length - 1] = temp;
 }
 
 void Array::RightShift(){
@@ -307,7 +308,7 @@ int main() {
         // cin >> index;
         // arra.RightShift();
         arra.Display();
-        arra.LeftRotate;
+        arra.LeftRotate();
         arra.Display();
         arra.RightRotate();
         arra.Display();
