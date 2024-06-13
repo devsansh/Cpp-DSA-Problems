@@ -6,7 +6,7 @@ int main(){
     string str;
     getline(cin,str);
 
-    int cChar{0},vChar{0};
+    int cChar{0},vChar{0},sChar;
     for(int i = 0; i < str.size();i++){
         if(str[i] == 'a' or str[i] == 'A'){
             vChar++;
@@ -20,10 +20,13 @@ int main(){
             vChar++;
         }else if((str[i] >= 'A' and str[i] <= 'Z') or (str[i] >= 'a' and str[i] <='z') ){
             cChar++;
+        }else if(str[i] == ' '){
+            sChar++;
         }
     }
 
     cout<<"Vowels: "<<vChar<<endl;
-    cout<<"Consonants: "<<cChar;
+    cout<<"Consonants: "<<cChar<<endl;
+    cout<<"Spaces: "<<sChar;
     return 0;
 }
