@@ -22,7 +22,12 @@ void insertAtHead(Node* &head, int data) {
 }
 
 // Function to insert a new node at the specified position in the list
-void insertAtMiddle(Node* head, int position, int data) {
+void insertAtPosition(Node* &head, int position, int data) {
+
+    if(position == 0){
+        insertAtHead(head,data);
+        return;
+    }
     Node* temp = head;
     int currentPosition = 0;
 
@@ -66,11 +71,16 @@ int main() {
     Node* node1 = new Node(10);
     head = node1;
     tail = node1;
+/*------------------------------------------*/
+    display(head);
     insertAtHead(head,0);
     display(head);
     insertAtTail(tail,30);
     display(head);
-    insertAtMiddle(head,2,20);
+    insertAtPosition(head,2,20);
+    display(head);
+/*------------------------------------------*/
+    insertAtPosition(head,0,123);
     display(head);
     return 0;
 }
