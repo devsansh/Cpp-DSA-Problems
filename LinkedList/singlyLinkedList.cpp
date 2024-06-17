@@ -45,9 +45,9 @@ void insertAtMiddle(Node* head, int position, int data) {
 
 // Function to insert a new node at the end of the list
 void insertAtTail(Node* &tail, int data) {
-    Node* temp = new Node(data);  // Create a new node with given data
-    tail->next = temp;            // Set the current tail's next pointer to the new node
-    tail = temp;                  // Update the tail to the new node
+    Node* newNode = new Node(data); // Create a new node with given data
+    tail->next = newNode;           // Link the new node to the current tail
+    tail = newNode;                 // Update the tail to the new node
 }
 
 // Function to display the linked list
@@ -61,25 +61,16 @@ void display(Node* head) {
 }
 
 int main() {
-    // Initialize the linked list with the first node
+    Node* head = NULL;
+    Node* tail = NULL;
     Node* node1 = new Node(10);
-    Node* head = node1;
-    Node* tail = node1;
-
-    // Insert nodes at the tail and display the list
-    insertAtTail(tail, 20);
+    head = node1;
+    tail = node1;
+    insertAtHead(head,0);
     display(head);
-
-    insertAtTail(tail, 30);
+    insertAtTail(tail,30);
     display(head);
-
-    // Insert a node at the head and display the list
-    insertAtHead(head, 5);
+    insertAtMiddle(head,2,20);
     display(head);
-
-    // Insert a node at the specified position and display the list
-    insertAtMiddle(head, 3, 100);
-    display(head);
-
     return 0;
 }
