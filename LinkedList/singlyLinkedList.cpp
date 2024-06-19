@@ -13,13 +13,9 @@ public:
         this->next = nullptr;
     }
 
-    ~Node(){
-        int value = this -> data;
-        if(this->next != NULL){
-            delete next;
-            this->next = NULL;
-        }
-        cout<<"Memory free for node with data "<<value<<endl;
+    ~Node() {
+        int value = this->data;
+        cout << "Memory free for node with data " << value << endl;
     }
 };
 
@@ -74,30 +70,45 @@ void insertAtPosition(Node* &head, Node* &tail, int position, int data) {
     temp->next = newNode;
 }
 
-void deleteNode(Node* &head,int position){
-    if(position == 0){
+// Function to delete a node at the specified position in the list
+void deleteNode(Node* &head, Node* &tail, int position) {
+    if (head == nullptr) {
+        cout << "List is empty" << endl;
+        return;
+    }
+
+    if (position == 0) {
         Node* temp = head;
         head = head->next;
-        temp->next = NULL;
+        temp->next = nullptr;
         delete temp;
-    }else{
-        Node* current = head;
-        Node* previous = NULL;
-
-        int count = 0;
-        while (count < position)
-        {
-            previous = current;
-            current = current->next;
-            count++;
+        if (head == nullptr) { // If the list becomes empty, update the tail
+            tail = nullptr;
         }
-
-        previous->next = current->next;
-        current->next = NULL;
-        delete current;
-        
+        return;
     }
-    
+
+    Node* current = head;
+    Node* previous = nullptr;
+    int count = 0;
+
+    while (count < position && current != nullptr) {
+        previous = current;
+        current = current->next;
+        count++;
+    }
+
+    if (current == nullptr) {
+        cout << "Position out of bounds" << endl;
+        return;
+    }
+
+    previous->next = current->next;
+    if (current->next == nullptr) { // If the deleted node was the tail, update the tail
+        tail = previous;
+    }
+    current->next = nullptr;
+    delete current;
 }
 
 // Function to calculate the length of the linked list
@@ -155,11 +166,10 @@ int main() {
 
     cout << "Length of LinkedList: " << length(head) << endl;
 
-    deleteNode(head,8);
+    deleteNode(head, tail, 8);
     display(head);
     cout << "Length of LinkedList: " << length(head) << endl;
 
-    cout<<"Tail after deleting last node: "<<tail->next;
-
+    cout << "Tail after deleting last node: " << tail->next;
     return 0;
 }
