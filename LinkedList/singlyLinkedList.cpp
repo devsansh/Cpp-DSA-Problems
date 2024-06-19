@@ -12,6 +12,15 @@ public:
         this->data = data;
         this->next = nullptr;
     }
+
+    ~Node(){
+        int value = this -> data;
+        if(this->next != NULL){
+            delete next;
+            this->next = NULL;
+        }
+        cout<<"Memory free for node with data "<<value<<endl;
+    }
 };
 
 // Function to insert a new node at the beginning of the list
@@ -63,6 +72,32 @@ void insertAtPosition(Node* &head, Node* &tail, int position, int data) {
     Node* newNode = new Node(data);
     newNode->next = temp->next;
     temp->next = newNode;
+}
+
+void deleteNode(Node* &head,int position){
+    if(position == 0){
+        Node* temp = head;
+        head = head->next;
+        temp->next = NULL;
+        delete temp;
+    }else{
+        Node* current = head;
+        Node* previous = NULL;
+
+        int count = 0;
+        while (count < position)
+        {
+            previous = current;
+            current = current->next;
+            count++;
+        }
+
+        previous->next = current->next;
+        current->next = NULL;
+        delete current;
+        
+    }
+    
 }
 
 // Function to calculate the length of the linked list
@@ -119,6 +154,12 @@ int main() {
     display(head);
 
     cout << "Length of LinkedList: " << length(head) << endl;
+
+    deleteNode(head,8);
+    display(head);
+    cout << "Length of LinkedList: " << length(head) << endl;
+
+    cout<<"Tail after deleting last node: "<<tail->next;
 
     return 0;
 }
