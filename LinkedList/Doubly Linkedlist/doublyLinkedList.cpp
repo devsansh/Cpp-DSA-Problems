@@ -108,12 +108,26 @@ int main() {
     // Insert nodes at various positions
     insertAtHead(head, tail, 20);
     display(head);
+    cout<<"\nLength of Doubly Linkedlist: "<<length(head)<<endl;
 
     insertAtTail(tail, 30);
     display(head);
+    cout<<"\nLength of Doubly Linkedlist: "<<length(head)<<endl;
 
     insertAtPosition(head, tail, 2, 999);
     display(head);
+    cout<<"\nLength of Doubly Linkedlist: "<<length(head)<<endl;
+
+    insertAtPosition(head, tail, 0, 998);
+    display(head);
+    cout<<"\nLength of Doubly Linkedlist: "<<length(head)<<endl;
+
+    insertAtPosition(head, tail,5, 1000);
+    display(head);
+    cout<<"\nLength of Doubly Linkedlist: "<<length(head)<<endl;
+    insertAtPosition(head, tail, 3, 333);
+    display(head);
+    cout<<"\nLength of Doubly Linkedlist: "<<length(head)<<endl;
 
     // Display the head and tail values and addresses
     cout << "\nHead address -> " << head << "\nHead value -> " << head->data << endl;
