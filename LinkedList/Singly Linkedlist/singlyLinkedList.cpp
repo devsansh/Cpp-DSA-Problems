@@ -15,7 +15,7 @@ public:
 
     ~Node() {
         int value = this->data;
-        cout << "Memory free for node with data " << value << endl;
+        cout << "Memory freed for node with data " << value << endl;
     }
 };
 
@@ -132,44 +132,69 @@ void display(Node* head) {
     cout << "nullptr" << endl;     // Indicate the end of the list
 }
 
+// Function to display the menu and handle user choices
+void displayMenu() {
+    cout << "Linked List Menu:" << endl;
+    cout << "1. Create a new node (initialize list)" << endl;
+    cout << "2. Insert at head" << endl;
+    cout << "3. Insert at tail" << endl;
+    cout << "4. Insert at position" << endl;
+    cout << "5. Delete node" << endl;
+    cout << "6. Display list" << endl;
+    cout << "7. Get length" << endl;
+    cout << "8. Exit" << endl;
+}
+
 int main() {
     Node* head = nullptr;
     Node* tail = nullptr;
-    Node* node1 = new Node(10);   // Create the first node
-    head = node1;
-    tail = node1;
-    display(head);
+    int choice, data, position;
 
-    insertAtTail(tail, 20);
-    display(head);
+    while (true) {
+        displayMenu();
+        cout << "Enter your choice: ";
+        cin >> choice;
 
-    insertAtTail(tail, 30);
-    display(head);
+        switch (choice) {
+            case 1:
+                cout << "Enter data for the new node: ";
+                cin >> data;
+                head = new Node(data);
+                tail = head;
+                break;
+            case 2:
+                cout << "Enter data to insert at head: ";
+                cin >> data;
+                insertAtHead(head, tail, data);
+                break;
+            case 3:
+                cout << "Enter data to insert at tail: ";
+                cin >> data;
+                insertAtTail(tail, data);
+                break;
+            case 4:
+                cout << "Enter position and data to insert: ";
+                cin >> position >> data;
+                insertAtPosition(head, tail, position, data);
+                break;
+            case 5:
+                cout << "Enter position of node to delete: ";
+                cin >> position;
+                deleteNode(head, tail, position);
+                break;
+            case 6:
+                display(head);
+                break;
+            case 7:
+                cout << "Length of LinkedList: " << length(head) << endl;
+                break;
+            case 8:
+                cout << "Exiting..." << endl;
+                return 0;
+            default:
+                cout << "Invalid choice. Please try again." << endl;
+        }
+    }
 
-    insertAtTail(tail, 40);
-    display(head);
-
-    insertAtTail(tail, 50);
-    display(head);
-
-    insertAtTail(tail, 60);
-    display(head);
-
-    insertAtPosition(head, tail, 2, 70);
-    display(head);
-
-    insertAtPosition(head, tail, 0, 100);
-    display(head);
-
-    insertAtPosition(head, tail, 8, 999);
-    display(head);
-
-    cout << "Length of LinkedList: " << length(head) << endl;
-
-    deleteNode(head, tail, 8);
-    display(head);
-    cout << "Length of LinkedList: " << length(head) << endl;
-
-    cout << "Tail after deleting last node: " << tail->next;
     return 0;
 }

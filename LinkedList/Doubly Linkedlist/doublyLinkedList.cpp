@@ -15,14 +15,13 @@ public:
         this->previous = nullptr;
     }
 
-    ~Node(){
+    ~Node() {
         int value = this->data;
-        if(next != NULL){
+        if (next != nullptr) {
             delete next;
-            next = NULL;
+            next = nullptr;
         }
-
-        cout<<"Memory free for node with data "<<value<<endl;
+        cout << "Memory free for node with data " << value << endl;
     }
 };
 
@@ -85,6 +84,7 @@ void insertAtPosition(Node* &head, Node* &tail, int position, int data) {
     newNode->previous = temp;
 }
 
+// Function to delete a node at a specific position in the list
 void deleteAtPosition(Node* &head, Node* &tail, int position) {
     if (head == nullptr) {
         cout << "List is empty" << endl;
@@ -113,17 +113,17 @@ void deleteAtPosition(Node* &head, Node* &tail, int position) {
         currentPosition++;
     }
 
-    if (temp == nullptr) { // Position is out of bounds
+    if (temp == nullptr) {  // Position is out of bounds
         cout << "Position out of bounds" << endl;
         return;
     }
 
-    if (temp->next == nullptr) { // If deleting the last node (tail)
+    if (temp->next == nullptr) {  // If deleting the last node (tail)
         tail = temp->previous;
         if (tail != nullptr) {
             tail->next = nullptr;
         } else {
-            head = nullptr; // If list becomes empty
+            head = nullptr;  // If list becomes empty
         }
     } else {
         temp->previous->next = temp->next;
@@ -156,43 +156,69 @@ int length(Node* head) {
     return length;
 }
 
+// Function to display the menu and handle user choices
+void displayMenu() {
+    cout << "Doubly Linked List Menu:" << endl;
+    cout << "1. Create a new node (initialize list)" << endl;
+    cout << "2. Insert at head" << endl;
+    cout << "3. Insert at tail" << endl;
+    cout << "4. Insert at position" << endl;
+    cout << "5. Delete node" << endl;
+    cout << "6. Display list" << endl;
+    cout << "7. Get length" << endl;
+    cout << "8. Exit" << endl;
+}
+
 int main() {
-    // Initializing the list with one node
-    Node* node_1 = new Node(10);
-    Node* head = node_1;
-    Node* tail = node_1;
+    Node* head = nullptr;
+    Node* tail = nullptr;
+    int choice, data, position;
 
-    // Display initial list
-    display(head);
+    while (true) {
+        displayMenu();
+        cout << "Enter your choice: ";
+        cin >> choice;
 
-    // Insert nodes at various positions
-    insertAtHead(head, tail, 20);
-    display(head);
-    cout<<"\nLength of Doubly Linkedlist: "<<length(head)<<endl;
-
-    insertAtTail(tail, 30);
-    display(head);
-    cout<<"\nLength of Doubly Linkedlist: "<<length(head)<<endl;
-
-    insertAtPosition(head, tail, 2, 999);
-    display(head);
-    cout<<"\nLength of Doubly Linkedlist: "<<length(head)<<endl;
-
-    insertAtPosition(head, tail, 0, 998);
-    display(head);
-    cout<<"\nLength of Doubly Linkedlist: "<<length(head)<<endl;
-
-    insertAtPosition(head, tail,5, 1000);
-    display(head);
-    cout<<"\nLength of Doubly Linkedlist: "<<length(head)<<endl;
-    insertAtPosition(head, tail, 3, 333);
-    display(head);
-    cout<<"\nLength of Doubly Linkedlist: "<<length(head)<<endl;
-    deleteAtPosition(head,tail,0);
-    display(head);
-    // Display the head and tail values and addresses
-    cout << "\nHead address -> " << head << "\nHead value -> " << head->data << endl;
-    cout << "\nTail address -> " << tail << "\nTail value -> " << tail->data << endl;
+        switch (choice) {
+            case 1:
+                cout << "Enter data for the new node: ";
+                cin >> data;
+                head = new Node(data);
+                tail = head;
+                break;
+            case 2:
+                cout << "Enter data to insert at head: ";
+                cin >> data;
+                insertAtHead(head, tail, data);
+                break;
+            case 3:
+                cout << "Enter data to insert at tail: ";
+                cin >> data;
+                insertAtTail(tail, data);
+                break;
+            case 4:
+                cout << "Enter position and data to insert: ";
+                cin >> position >> data;
+                insertAtPosition(head, tail, position, data);
+                break;
+            case 5:
+                cout << "Enter position of node to delete: ";
+                cin >> position;
+                deleteAtPosition(head, tail, position);
+                break;
+            case 6:
+                display(head);
+                break;
+            case 7:
+                cout << "Length of Doubly LinkedList: " << length(head) << endl;
+                break;
+            case 8:
+                cout << "Exiting..." << endl;
+                return 0;
+            default:
+                cout << "Invalid choice. Please try again." << endl;
+        }
+    }
 
     return 0;
 }
