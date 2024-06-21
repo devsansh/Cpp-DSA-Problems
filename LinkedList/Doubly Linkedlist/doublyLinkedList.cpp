@@ -14,6 +14,16 @@ public:
         this->next = nullptr;
         this->previous = nullptr;
     }
+
+    ~Node(){
+        int value = this->data;
+        if(next != NULL){
+            delete next;
+            next = NULL;
+        }
+
+        cout<<"Memory free for node with data "<<value<<endl;
+    }
 };
 
 // Function to insert a node at the head of the list
@@ -75,6 +85,56 @@ void insertAtPosition(Node* &head, Node* &tail, int position, int data) {
     newNode->previous = temp;
 }
 
+void deleteAtPosition(Node* &head, Node* &tail, int position) {
+    if (head == nullptr) {
+        cout << "List is empty" << endl;
+        return;
+    }
+
+    if (position == 0) {
+        Node* temp = head;
+        head = head->next;
+        if (head != nullptr) {
+            head->previous = nullptr;
+        } else {
+            tail = nullptr;
+        }
+        temp->next = nullptr;
+        delete temp;
+        return;
+    }
+
+    Node* temp = head;
+    int currentPosition = 0;
+
+    // Traverse to the position of the node to be deleted
+    while (temp != nullptr && currentPosition < position) {
+        temp = temp->next;
+        currentPosition++;
+    }
+
+    if (temp == nullptr) { // Position is out of bounds
+        cout << "Position out of bounds" << endl;
+        return;
+    }
+
+    if (temp->next == nullptr) { // If deleting the last node (tail)
+        tail = temp->previous;
+        if (tail != nullptr) {
+            tail->next = nullptr;
+        } else {
+            head = nullptr; // If list becomes empty
+        }
+    } else {
+        temp->previous->next = temp->next;
+        temp->next->previous = temp->previous;
+    }
+
+    temp->next = nullptr;
+    temp->previous = nullptr;
+    delete temp;
+}
+
 // Function to display the list from head to tail
 void display(Node* head) {
     Node* temp = head;
@@ -128,7 +188,8 @@ int main() {
     insertAtPosition(head, tail, 3, 333);
     display(head);
     cout<<"\nLength of Doubly Linkedlist: "<<length(head)<<endl;
-
+    deleteAtPosition(head,tail,0);
+    display(head);
     // Display the head and tail values and addresses
     cout << "\nHead address -> " << head << "\nHead value -> " << head->data << endl;
     cout << "\nTail address -> " << tail << "\nTail value -> " << tail->data << endl;
