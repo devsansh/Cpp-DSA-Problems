@@ -2,6 +2,7 @@
 A list of programming problems from Basic to Advanced C++.
 
 ### Topics:
+*[Practice](Practice)
 * [Array](Array)
 * [Strings](Strings)
 * [Linked List](LinkedList)
